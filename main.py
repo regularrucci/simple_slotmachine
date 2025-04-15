@@ -3,14 +3,13 @@ import random
 import time
 
 symbols = {
-    "melon": "🍉",
-    "cherry": "🍒",
-    "bell": "🔔",
-    "seven": "7️⃣"
+    "melon": {"emoji": "🍉", "payout": 2},
+    "cherry": {"emoji": "🍒", "payout": 3},
+    "bell": {"emoji": "🔔", "payout": 5},
+    "seven": {"emoji": "7️⃣", "payout": 10}
 }
 list1 = ["melon", "cherry", "bell", "seven"]
 balance = 100
-
 
 def spin(bet):
     global balance
@@ -19,20 +18,20 @@ def spin(bet):
     line3 = random.choice(list1)
     time.sleep(1)
     print(
-        f"Spinning... \n| {symbols[line1]} | {symbols[line2]} | {symbols[line3]} |")
+        f"Spinning... \n| {symbols[line1]["emoji"]} | {symbols[line2]["emoji"]} | {symbols[line3]["emoji"]} |")
     time.sleep(1)
     if line1 == line2 == line3:
         if line1 == "melon":
-            win = bet * 2
+            win = bet * symbols[line1]["payout"]
             print(f"Congrats! 3 melons! +{win}$")
         elif line1 == "cherry":
-            win = bet * 3
+            win = bet * symbols[line1]["payout"]
             print(f"Congrats! 3 cherries! +{win}$")
         elif line1 == "bell":
-            win = bet * 5
+            win = bet * symbols[line1]["payout"]
             print(f"Congrats! 3 bells! +{win}$")
         elif line1 == "seven":
-            win = bet * 10
+            win = bet * symbols[line1]["payout"]
             print(f"JACKPOT!!! 3 sevens! +{win}$")
         balance += win
     elif line1 == line2 or line2 == line3 or line3 == line1:
@@ -41,7 +40,6 @@ def spin(bet):
         balance += win
     else:
         print("Try again! ")
-
 
 print("Hello! Do you want to play? ")
 while True:
